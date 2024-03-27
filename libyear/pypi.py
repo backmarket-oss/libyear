@@ -56,6 +56,7 @@ def get_no_of_releases(name, version):
 def get_version_release_dates(name, version, version_lt):
     pypi_data = get_pypi_data(name)
     if not pypi_data:
+        print(f'No Pypi data for package "{name}"')
         return None, None, None, None
 
     releases = pypi_data['releases']
@@ -65,6 +66,7 @@ def get_version_release_dates(name, version, version_lt):
 
     version = get_version(pypi_data, version)
     if version is None:
+        print(f'No Pypi version "{version}" for package "{name}"')
         return None, None, None, None
 
     try:

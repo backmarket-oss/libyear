@@ -3,7 +3,7 @@ import argparse
 
 from prettytable import PrettyTable
 
-from libyear.pypi import get_lib_days, get_no_of_releases
+from libyear.pypi import get_lib_days
 from libyear.utils import load_requirements, get_requirement_files, get_requirement_name_and_version
 
 
