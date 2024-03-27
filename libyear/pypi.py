@@ -1,7 +1,11 @@
+import logging
+
 from packaging.version import Version
 
 import dateutil.parser
 import requests
+
+logger = logging.getLogger(__name__)
 
 
 def get_pypi_data(name, version=None):
@@ -56,6 +60,7 @@ def get_no_of_releases(name, version):
 def get_version_release_dates(name, version, version_lt):
     pypi_data = get_pypi_data(name)
     if not pypi_data:
+        logger.warning(f'No Pypi data for package "{name}"')
         return None, None, None, None
 
     releases = pypi_data['releases']
@@ -65,12 +70,13 @@ def get_version_release_dates(name, version, version_lt):
 
     version = get_version(pypi_data, version)
     if version is None:
+        logger.warning(f'No Pypi version "{version}" for package "{name}"')
         return None, None, None, None
 
     try:
         latest_version_date = releases[latest_version][-1]['upload_time_iso_8601']
     except IndexError:
-        print(f'Latest version of {name!r} has no upload time.')
+        logger.info(f'Latest version of {name!r} has no upload time.')
         return None, None, None, None
 
     latest_version_date = dateutil.parser.parse(latest_version_date)
@@ -80,7 +86,7 @@ def get_version_release_dates(name, version, version_lt):
     try:
         version_date = releases[version][-1]['upload_time_iso_8601']
     except IndexError:
-        print(f'Used release of {name}=={version} has no upload time.')
+        logger.info(f'Used release of {name}=={version} has no upload time.')
         return None, None, None, None
 
     version_date = dateutil.parser.parse(version_date)
