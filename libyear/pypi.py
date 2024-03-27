@@ -1,4 +1,4 @@
-from distutils.version import LooseVersion
+from packaging.version import Version
 
 import dateutil.parser
 import requests
@@ -34,9 +34,9 @@ def get_version(pypi_data, version, lt=False):
         releases = sorted(releases, key=lambda x: x[1], reverse=True)
         releases = [r for r, rd in releases]
         if version is None:
-            curr_ver = LooseVersion(clean_version(orig_ver))
+            curr_ver = Version(clean_version(orig_ver))
             releases_float = [clean_version(r) for r in releases]
-            releases_float = [r for r in releases_float if LooseVersion(r) >= curr_ver]
+            releases_float = [r for r in releases_float if Version(r) >= curr_ver]
             return releases[len(releases_float)]
 
         idx = releases.index(version)
