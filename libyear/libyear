@@ -8,6 +8,9 @@ from libyear.pypi import get_lib_days
 from libyear.utils import load_requirements, get_requirement_files, get_requirement_name_and_version
 
 
+logger = logging.getLogger(__name__)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', help="Requirements file/path", action='store')
@@ -39,11 +42,12 @@ def main():
         pt.reversesort = True
 
     if total_days == 0:
-        logging.info("Your system is up-to-date!")
+        logger.info("Your system is up-to-date!")
         return
 
     print(pt)
-    logging.info("Your system is %s libyears behind" % str(round(total_days / 365, 2)))
+
+    logger.info("Your system is %s libyears behind" % str(round(total_days / 365, 2)))
 
 
 if __name__ == "__main__":
