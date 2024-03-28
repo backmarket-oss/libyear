@@ -1,3 +1,5 @@
+from typing import TextIO
+
 from prettytable import PrettyTable
 
 from libyear.export_format.export_format import Item
@@ -6,7 +8,6 @@ from libyear.utils import calculate_libyear
 
 class ASCIIFormatter:
     pt: PrettyTable
-    sort: str
     total_days: int
 
     def initialize(self, sort: bool):
@@ -23,6 +24,6 @@ class ASCIIFormatter:
     def end(self, days: int):
         self.total_days = days
 
-    def print(self):
-        print(self.pt)
-        print("Your system is %s libyears behind" % calculate_libyear(days=self.total_days))
+    def print(self, output: TextIO):
+        output.write(self.pt.get_string() + "\n")
+        output.write("Your system is %s libyears behind" % calculate_libyear(days=self.total_days) + "\n")

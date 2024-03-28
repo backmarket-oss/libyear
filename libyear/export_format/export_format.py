@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Protocol
+from typing import Protocol, TextIO
 
 from pydantic import BaseModel
 
@@ -17,7 +17,7 @@ class Item(BaseModel):
 
 
 class ExportFormat(Protocol):
-    def initialize(self, sort: str | None):
+    def initialize(self, sort: bool):
         """
         Use to set data before we iterate over the packages
         """
@@ -35,7 +35,7 @@ class ExportFormat(Protocol):
         """
         pass
 
-    def print(self):
+    def print(self, output: TextIO):
         """
         Use to print the data
         """

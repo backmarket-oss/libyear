@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import logging
+import sys
 
 from libyear.export_format.export_format import Format, Item
 from libyear.export_format.factory import get_formatter
@@ -40,11 +41,11 @@ def main():
         total_days += days
 
     if total_days == 0:
-        print("Your system is up-to-date!")
+        logger.info("Your system is up-to-date!")
         return
 
     formatter.end(days=total_days)
-    formatter.print()
+    formatter.print(output=sys.stdout)
 
 
 if __name__ == "__main__":
