@@ -41,7 +41,7 @@ def test_libyear_main_output(capsys):
 
     with mock.patch(
         'libyear.argparse.ArgumentParser.parse_args',
-        return_value=argparse.Namespace(r=requirements_path, sort=False)
+        return_value=argparse.Namespace(r=requirements_path, sort=False, format="ASCII")
     ):
         libyear.main()
 
