@@ -43,12 +43,12 @@ def main():
         total_days += days
 
     if total_days == 0:
-        logger.info("Your system is up-to-date!")
+        print("Your system is up-to-date!")
         return
 
     formatter.print()
 
-    logger.info("Your system is %s libyears behind" % calculate_libyear(days=total_days))
+    print("Your system is %s libyears behind" % calculate_libyear(days=total_days))
 
 
 if __name__ == "__main__":
