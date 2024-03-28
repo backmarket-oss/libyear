@@ -29,10 +29,7 @@ def main():
     total_days = 0
     for req in requirements:
         name, version, version_lt = get_requirement_name_and_version(req)
-        if not name:
-            continue
-
-        if not version and not version_lt:
+        if not name or (not version and not version_lt):
             continue
 
         v, lv, days = get_lib_days(name, version, version_lt)
@@ -46,9 +43,8 @@ def main():
         print("Your system is up-to-date!")
         return
 
+    formatter.end(days=total_days)
     formatter.print()
-
-    print("Your system is %s libyears behind" % calculate_libyear(days=total_days))
 
 
 if __name__ == "__main__":
