@@ -1,9 +1,12 @@
 import os
 import re
+import logging
 
 REQUIREMENT_NAME_RE = r'^([^=><]+)'
 REQUIREMENT_VERSION_LT_RE = r'<([^$,]*)'
 REQUIREMENT_VERSION_LTE_RE = r'[<=]=([^$,]*)'
+
+logger = logging.getLogger(__name__)
 
 
 def get_requirement_name_and_version(requirement):
@@ -11,19 +14,23 @@ def get_requirement_name_and_version(requirement):
     # Remove comments if they are on the same line
     requirement = requirement.split()[0].strip()
     if not requirement:
+        logger.warning("Requirement not found")
         return no_requirement
 
     name = re.findall(REQUIREMENT_NAME_RE, requirement)
     if not name:
+        logger.warning("Name not found in the requirement")
         return no_requirement
 
     version = re.findall(REQUIREMENT_VERSION_LTE_RE, requirement)
     version_lt = re.findall(REQUIREMENT_VERSION_LT_RE, requirement)
     if not version_lt and not version:
+        logger.warning("version and latest version not found in the requirement")
         return no_requirement
 
     if version:
         return name[0], version[0], None
+
     return name[0], None, version_lt[0]
 
 
@@ -31,6 +38,7 @@ def get_requirement_files(path_or_file):
     if os.path.isfile(path_or_file):
         yield path_or_file
         return
+
     for path, subdirs, files in os.walk(path_or_file):
         for name in files:
             yield os.path.join(path, name)
@@ -67,3 +75,10 @@ def load_requirements(*requirements_paths):
             if is_requirement(line)
         )
     return list(requirements)
+
+
+def calculate_libyear(days: int) -> str:
+    """
+    Calculation of the libyear
+    """
+    return str(round(days / 365, 2))
