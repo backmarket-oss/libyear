@@ -347,6 +347,6 @@ def test_libyear_main_output_with_json(capsys):
                 'libyear': '7.71',
                 },
             ],
-        'libyears_behind': 61012
+        'libyears_behind': '167.16'
     }
 
