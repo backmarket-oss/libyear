@@ -5,6 +5,7 @@ description = "A python library to calculate libyear for python depenencies"
 authors = []
 readme = "README.md"
 keywords = [ "backmarket", "libyear",]
+license = "MIT"
 
 
 [tool.poetry.dependencies]
@@ -30,3 +31,6 @@ coverage = "^7.0.5"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[project]
+license = {text = "MIT License"}
