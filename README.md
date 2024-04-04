@@ -12,18 +12,36 @@ https://libyear.com/
 
 ![Demo Image](./docs/demo.png)
 
-## How to install
-`pip install libyear`
+## Description
 
+This project is used for python project to calculate the libyear metric for your dependencies.
+
+## Getting started
+
+### How to install
+
+For pip: `pip install libyear`
+
+For poetry: `poetry add libyear`
 
 ## Usage
+
+**Requirement:**
+
+- For **poetry**: you still need to generate a `requirements.txt` file by using `poetry export -f requirements.txt --output requirements.txt`
+
+**Commands**
+
 A single requirement file
 `libyear -r requirements.txt`
 
 A folder with requirement files
 `libyear -r requirements/`
 
-## Example output
+### Example output
+
+#### ASCII
+
 ```
 libyear -r requirements.txt 
 +-------------------------+-----------------+----------------+-----------------+
@@ -69,6 +87,33 @@ libyear -r requirements.txt
 Your system is 103.78 libyears behind
 ```
 
+#### JSON:
+```json 
+{
+  "dependencies": [
+    {
+      "name": "pytest-testmon",
+      "version": "0.9.16",
+      "latest_version": "2.1.1",
+      "libyear": "4.95"
+    },
+    {
+      "name": "six",
+      "version": "1.12.0",
+      "latest_version": "1.16.0",
+      "libyear": "2.4"
+    },
+    {
+      "name": "flake8-bugbear",
+      "version": "19.3.0",
+      "latest_version": "24.2.6",
+      "libyear": "4.87"
+    }
+  ],
+  "libyears_behind": "12.22"
+}
+```
+
 ## Example 1
 For example, a rails 5.0.0 dependency (released June 30, 2016) is roughly 1 libyear behind the 5.1.2 version (released June 26, 2017).
 
@@ -86,3 +131,14 @@ Apps below 10 libyears are considered to be healthy apps. We regularly rescue pr
 
 ## References
 J. Cox, E. Bouwers, M. van Eekelen and J. Visser, Measuring Dependency Freshness in Software Systems. In Proceedings of the 37th International Conference on Software Engineering (ICSE 2015), May 2015 https://ericbouwers.github.io/papers/icse15.pdf
+
+
+## Contributing
+
+If you want to contribute to this project, please fork it, create a dedicated branch to make your changed and simply raise a pull request that targets this repository.
+
+## License
+
+Copyright 2024 MIT.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
