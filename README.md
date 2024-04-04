@@ -14,7 +14,7 @@ https://libyear.com/
 
 ## Description
 
-This project is used for python project (pip and poetry) to measure what is your libyear dependencies.
+This project is used for python project to calculate the libyear metric for your dependencies.
 
 ## Getting started
 
@@ -25,6 +25,13 @@ For pip: `pip install libyear`
 For poetry: `poetry add libyear`
 
 ## Usage
+
+**Requirement:**
+
+- For **poetry**: you still need to generate a `requirements.txt` file by using `poetry export -f requirements.txt --output requirements.txt`
+
+**Commands**
+
 A single requirement file
 `libyear -r requirements.txt`
 
@@ -101,219 +108,9 @@ Your system is 103.78 libyears behind
       "version": "19.3.0",
       "latest_version": "24.2.6",
       "libyear": "4.87"
-    },
-    {
-      "name": "nodeenv",
-      "version": "1.3.3",
-      "latest_version": "1.8.0",
-      "libyear": "4.51"
-    },
-    {
-      "name": "cfgv",
-      "version": "2.0.1",
-      "latest_version": "3.4.0",
-      "libyear": "4.06"
-    },
-    {
-      "name": "filelock",
-      "version": "3.0.12",
-      "latest_version": "3.13.3",
-      "libyear": "4.85"
-    },
-    {
-      "name": "appdirs",
-      "version": "1.4.3",
-      "latest_version": "1.4.4",
-      "libyear": "3.18"
-    },
-    {
-      "name": "regex",
-      "version": "2019.12.9",
-      "latest_version": "2023.12.25",
-      "libyear": "4.04"
-    },
-    {
-      "name": "pyflakes",
-      "version": "2.1.1",
-      "latest_version": "3.2.0",
-      "libyear": "4.85"
-    },
-    {
-      "name": "typing-extensions",
-      "version": "3.7.4.1",
-      "latest_version": "4.10.0",
-      "libyear": "4.33"
-    },
-    {
-      "name": "mypy",
-      "version": "0.750",
-      "latest_version": "1.9.0",
-      "libyear": "4.27"
-    },
-    {
-      "name": "flake8",
-      "version": "3.7.7",
-      "latest_version": "7.0.0",
-      "libyear": "4.86"
-    },
-    {
-      "name": "more-itertools",
-      "version": "7.0.0",
-      "latest_version": "10.2.0",
-      "libyear": "4.79"
-    },
-    {
-      "name": "entrypoints",
-      "version": "0.3",
-      "latest_version": "0.4",
-      "libyear": "3.07"
-    },
-    {
-      "name": "pyparsing",
-      "version": "2.4.5",
-      "latest_version": "3.1.2",
-      "libyear": "4.32"
-    },
-    {
-      "name": "argh",
-      "version": "0.26.2",
-      "latest_version": "0.31.2",
-      "libyear": "7.71"
-    },
-    {
-      "name": "packaging",
-      "version": "19.2",
-      "latest_version": "24.0",
-      "libyear": "4.48"
-    },
-    {
-      "name": "watchdog",
-      "version": "0.9.0",
-      "latest_version": "4.0.0",
-      "libyear": "5.45"
-    },
-    {
-      "name": "colorama",
-      "version": "0.4.1",
-      "latest_version": "0.4.6",
-      "libyear": "3.92"
-    },
-    {
-      "name": "identify",
-      "version": "1.4.5",
-      "latest_version": "2.5.35",
-      "libyear": "4.68"
-    },
-    {
-      "name": "attrs",
-      "version": "19.1.0",
-      "latest_version": "23.2.0",
-      "libyear": "4.83"
-    },
-    {
-      "name": "py",
-      "version": "1.8.0",
-      "latest_version": "1.11.0",
-      "libyear": "2.7"
-    },
-    {
-      "name": "mccabe",
-      "version": "0.6.1",
-      "latest_version": "0.7.0",
-      "libyear": "4.99"
-    },
-    {
-      "name": "typed-ast",
-      "version": "1.4.0",
-      "latest_version": "1.5.5",
-      "libyear": "4.08"
-    },
-    {
-      "name": "pathspec",
-      "version": "0.6.0",
-      "latest_version": "0.12.1",
-      "libyear": "4.19"
-    },
-    {
-      "name": "pluggy",
-      "version": "0.13.1",
-      "latest_version": "1.4.0",
-      "libyear": "4.18"
-    },
-    {
-      "name": "toml",
-      "version": "0.10.0",
-      "latest_version": "0.10.2",
-      "libyear": "2.08"
-    },
-    {
-      "name": "pytest",
-      "version": "4.4.0",
-      "latest_version": "8.1.1",
-      "libyear": "4.94"
-    },
-    {
-      "name": "pycodestyle",
-      "version": "2.5.0",
-      "latest_version": "2.11.1",
-      "libyear": "4.7"
-    },
-    {
-      "name": "isort",
-      "version": "4.3.17",
-      "latest_version": "5.13.2",
-      "libyear": "4.68"
-    },
-    {
-      "name": "coverage",
-      "version": "4.5.3",
-      "latest_version": "7.4.4",
-      "libyear": "5.02"
-    },
-    {
-      "name": "black",
-      "version": "19.10b0",
-      "latest_version": "24.3.0",
-      "libyear": "4.38"
-    },
-    {
-      "name": "virtualenv",
-      "version": "16.6.2",
-      "latest_version": "20.25.1",
-      "libyear": "4.61"
-    },
-    {
-      "name": "click",
-      "version": "7.0",
-      "latest_version": "8.1.7",
-      "libyear": "4.89"
-    },
-    {
-      "name": "pyyaml",
-      "version": "5.1.1",
-      "latest_version": "6.0.1",
-      "libyear": "4.12"
-    },
-    {
-      "name": "tox",
-      "version": "3.14.2",
-      "latest_version": "4.14.2",
-      "libyear": "4.3"
-    },
-    {
-      "name": "pre-commit",
-      "version": "1.20.0",
-      "latest_version": "3.7.0",
-      "libyear": "4.41"
-    },
-    {
-      "name": "mypy-extensions",
-      "version": "0.4.1",
-      "latest_version": "1.0.0",
-      "libyear": "4.45"
     }
   ],
-  "libyears_behind": "167.16"
+  "libyears_behind": "12.22"
 }
 ```
 
@@ -342,16 +139,6 @@ If you want to contribute to this project, please fork it, create a dedicated br
 
 ## License
 
-Copyright 2024.
+Copyright 2024 MIT.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
