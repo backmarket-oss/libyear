@@ -70,8 +70,8 @@ def load_requirements(*requirements_paths):
     """
     requirements = set()
     for path in requirements_paths:
-        with open(path).readlines() as lines:
-            requirements.update(line.strip() for line in lines if is_requirement(line))
+        with open(path) as file:
+            requirements.update(line.strip() for line in file.readlines() if is_requirement(line))
     return list(requirements)
 
 
