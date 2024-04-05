@@ -6,7 +6,7 @@ on:
   push:
     branches: ['**']
 jobs:
-  unit-test:
+  pre-commit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,5 +17,7 @@ jobs:
           python-version: '3.12'
       - name: Install Poetry
         uses: snok/install-poetry@v1
-      - name: Pre commit
-        run: pre-commit run -a
+      - name: Install package
+        run: make init
+      - name: Pre-commit run
+        uses: pre-commit/action@v3.0.0
