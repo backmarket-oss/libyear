@@ -1,0 +1,65 @@
+default_stages: [commit]
+
+default_language_version:
+  python: python3.12
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 'v4.5.0'
+    hooks:
+      - id: check-toml
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: 'v0.10.0.1'
+    hooks:
+      - id: shellcheck
+        args: ['-x']
+
+  - repo: local
+    hooks:
+      - id: python-check-blanket-nosec
+        name: check blanket nosec
+        entry: '# nosec(?!: (B[0-9]{3} ?)+( +#.*)*$)'
+        language: pygrep
+        types: [python]
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: 'v1.35.1'
+    hooks:
+      - id: yamllint
+        exclude: ^(deployment)
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: '1.7.8'
+    hooks:
+      - id: bandit
+        additional_dependencies: ['.[toml]']
+        args: ['-c', 'pyproject.toml']
+
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy
+        files: 'libyear'
+        entry: poetry run mypy
+        language: system
+        types: [python]
+        require_serial: true
+
+  - repo: local
+    hooks:
+      - id: spectral-lint
+        name: spectral-lint
+        entry: make spectral-lint
+        files: 'docs/openapi/.*\.yaml'
+        language: system
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: 'v0.3.3'
+    hooks:
+      - id: ruff
+        args: ['--exit-non-zero-on-fix']
+      - id: ruff-format
+        exclude: ^(migrations)

@@ -1,5 +1,6 @@
 from enum import Enum
-from typing import Protocol, TextIO
+from typing import Protocol
+from typing import TextIO
 
 from pydantic import BaseModel
 

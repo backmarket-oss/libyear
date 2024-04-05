@@ -1,4 +1,4 @@
-name: unit-tests
+name: pre-commit
 on:
   pull_request:
     types:
@@ -17,5 +17,5 @@ jobs:
           python-version: '3.12'
       - name: Install Poetry
         uses: snok/install-poetry@v1
-      - name: Unit Test
-        run: make test-unit
+      - name: Pre commit
+        run: pre-commit run -a

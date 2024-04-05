@@ -1,4 +1,5 @@
-from typing import TextIO, List
+from typing import List
+from typing import TextIO
 
 from pydantic import BaseModel
 
@@ -15,7 +16,7 @@ class Dependency(BaseModel):
 
 class JsonOutput(BaseModel):
     dependencies: List[Dependency] = []
-    libyears_behind: str = ''
+    libyears_behind: str = ""
 
 
 class JSONFormatter:
@@ -32,7 +33,7 @@ class JSONFormatter:
                 name=item.name,
                 version=item.version,
                 latest_version=item.latest_version,
-                libyear=item.libyear
+                libyear=item.libyear,
             )
         )
 
@@ -40,7 +41,7 @@ class JSONFormatter:
         self.json_output.libyears_behind = calculate_libyear(days=days)
 
         if self.sort:
-            self.json_output.dependencies.sort(key= lambda dep : (dep.libyear, dep.name))
+            self.json_output.dependencies.sort(key=lambda dep: (dep.libyear, dep.name))
 
     def print(self, output: TextIO):
         output.write(self.json_output.model_dump_json())

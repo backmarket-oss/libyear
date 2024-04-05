@@ -12,10 +12,15 @@ class ASCIIFormatter:
 
     def initialize(self, sort: bool):
         self.pt = PrettyTable()
-        self.pt.field_names = ['Library', 'Current Version', 'Latest Version', 'Libyears behind']
+        self.pt.field_names = [
+            "Library",
+            "Current Version",
+            "Latest Version",
+            "Libyears behind",
+        ]
 
         if sort:
-            self.pt.sortby = 'Libyears behind'
+            self.pt.sortby = "Libyears behind"
             self.pt.reversesort = True
 
     def add_item(self, item: Item):

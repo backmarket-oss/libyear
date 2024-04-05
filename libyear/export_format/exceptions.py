@@ -1,3 +1,2 @@
-
 class FormatterNotImplementedError(Exception):
     pass
