@@ -1,9 +1,8 @@
 import logging
 
-from packaging.version import Version
-
 import dateutil.parser
 import requests
+from packaging.version import Version
 
 logger = logging.getLogger(__name__)
 
@@ -13,15 +12,15 @@ def get_pypi_data(name, version=None):
     url = "https://pypi.org/pypi/%s/json" % name
     if version:
         url = "https://pypi.org/pypi/%s/%s/json" % (name, version)
-    r = requests.get(url)
+    r = requests.get(url, timeout=30)
     if r.status_code < 400:
         return r.json()
     return {}
 
 
 def clean_version(version):
-    version = [v for v in version if v.isdigit() or v == '.']
-    return ''.join(version)
+    version = [v for v in version if v.isdigit() or v == "."]
+    return "".join(version)
 
 
 def get_version(pypi_data, version, lt=False):
@@ -29,12 +28,12 @@ def get_version(pypi_data, version, lt=False):
         return None
 
     orig_ver = version
-    releases = pypi_data['releases']
+    releases = pypi_data["releases"]
     if version not in releases:
-        version_data = get_pypi_data(pypi_data['info']['name'], version=version)
-        version = version_data.get('info', {}).get('version')
+        version_data = get_pypi_data(pypi_data["info"]["name"], version=version)
+        version = version_data.get("info", {}).get("version")
     if lt:
-        releases = [(r, rd[-1]['upload_time_iso_8601']) for r, rd in releases.items() if rd]
+        releases = [(r, rd[-1]["upload_time_iso_8601"]) for r, rd in releases.items() if rd]
         releases = sorted(releases, key=lambda x: x[1], reverse=True)
         releases = [r for r, rd in releases]
         if version is None:
@@ -48,14 +47,16 @@ def get_version(pypi_data, version, lt=False):
             return releases[idx + 1]
     return version
 
+
 def get_no_of_releases(name, version):
     pypi_data = get_pypi_data(name)
     if not pypi_data:
         return None, None, None, None
 
-    releases = pypi_data['releases']
-    
-    return (len(releases)-list(releases).index(version))
+    releases = pypi_data["releases"]
+
+    return len(releases) - list(releases).index(version)
+
 
 def get_version_release_dates(name, version, version_lt):
     pypi_data = get_pypi_data(name)
@@ -63,8 +64,8 @@ def get_version_release_dates(name, version, version_lt):
         logger.warning(f'No Pypi data for package "{name}"')
         return None, None, None, None
 
-    releases = pypi_data['releases']
-    latest_version = pypi_data['info']['version']
+    releases = pypi_data["releases"]
+    latest_version = pypi_data["info"]["version"]
     if version_lt:
         version = get_version(pypi_data, version_lt, lt=True)
 
@@ -74,9 +75,9 @@ def get_version_release_dates(name, version, version_lt):
         return None, None, None, None
 
     try:
-        latest_version_date = releases[latest_version][-1]['upload_time_iso_8601']
+        latest_version_date = releases[latest_version][-1]["upload_time_iso_8601"]
     except IndexError:
-        logger.info(f'Latest version of {name!r} has no upload time.')
+        logger.info(f"Latest version of {name!r} has no upload time.")
         return None, None, None, None
 
     latest_version_date = dateutil.parser.parse(latest_version_date)
@@ -84,9 +85,9 @@ def get_version_release_dates(name, version, version_lt):
         return None, latest_version_date, latest_version, latest_version_date
 
     try:
-        version_date = releases[version][-1]['upload_time_iso_8601']
+        version_date = releases[version][-1]["upload_time_iso_8601"]
     except IndexError:
-        logger.info(f'Used release of {name}=={version} has no upload time.')
+        logger.info(f"Used release of {name}=={version} has no upload time.")
         return None, None, None, None
 
     version_date = dateutil.parser.parse(version_date)

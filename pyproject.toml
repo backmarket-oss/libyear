@@ -26,6 +26,8 @@ pytest-asyncio = "^0.23.0"
 pytest-runner = "^6.0.1"
 pytest-vcr = "^1.0.2"
 coverage = "^7.0.5"
+types-python-dateutil = "^2.9.0.20240316"
+types-requests = "^2.31.0.20240403"
 
 
 [build-system]
@@ -34,3 +36,102 @@ build-backend = "poetry.core.masonry.api"
 
 [project]
 license = {text = "MIT License"}
+
+[tool.poetry.group.typing.dependencies]
+mypy = "1.9.0"
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+
+[tool.coverage.run]
+source = ["libyear"]
+omit = [
+    "tests/conftest.py",
+]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_lines = [
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise NotImplementedError",
+    "pragma: no cover",
+    # Coverage is not expected on pytest.fail() calls in tests
+    ".*pytest.fail.*",
+]
+fail_under = 80
+skip_covered = true
+show_missing = true
+
+[tool.mypy]
+python_version = "3.12"
+files = ["libyear"]
+enable_error_code = ["ignore-without-code"]
+check_untyped_defs = true
+allow_incomplete_defs = false
+warn_unused_configs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+# Make sure that warnings raise errors, to handle things like deprecations as soon as possible.
+filterwarnings = [
+    "error",  # Make sure that warnings raise errors, to handle things like deprecations as soon as possible.
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+fix = true
+fixable = ["I"]
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-no-pep420
+    "INP",
+    # flake8-print
+    "T20",
+    # flake8-pytest-style
+    "PT",
+    # flake8-simplify
+    "SIM",
+    # flake8-tidy-imports
+    "TID",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # ruff
+    "RUF",
+]
+ignore = [
+    # line too long (already checked by ruff format)
+    "E501",
+]
+
+[tool.ruff.isort]
+force-single-line = true
+
+[tool.ruff.per-file-ignores]
+# Some modules are not part of the service package, so it's ok not to have an `__init__.py`,
+# which is why we ignore `INP001` (because it's false positives for those specific cases for us).
+"conf/*" = ["INP001"]
+"scripts/*" = ["INP001"]
