@@ -44,7 +44,7 @@ mypy = "1.9.0"
 exclude_dirs = ["tests"]
 
 [tool.coverage.run]
-source = ["upload_service_cl"]
+source = ["libyear"]
 omit = [
     "tests/conftest.py",
 ]
@@ -64,7 +64,7 @@ show_missing = true
 
 [tool.mypy]
 python_version = "3.12"
-files = ["upload_service_cl"]
+files = ["libyear"]
 enable_error_code = ["ignore-without-code"]
 check_untyped_defs = true
 allow_incomplete_defs = false
@@ -81,10 +81,6 @@ ignore_missing_imports = true
 # Make sure that warnings raise errors, to handle things like deprecations as soon as possible.
 filterwarnings = [
     "error",  # Make sure that warnings raise errors, to handle things like deprecations as soon as possible.
-    # overrides for the errors: schemathesis and hypothesis
-    "ignore::DeprecationWarning:hypothesis_jsonschema",
-    "ignore::DeprecationWarning:schemathesis",
-    "ignore:.*custom tp_new.*in Python 3.14.*:DeprecationWarning", # This is an issue not resolved in the gcs lib yet
 ]
 
 [tool.ruff]
@@ -139,6 +135,3 @@ force-single-line = true
 # which is why we ignore `INP001` (because it's false positives for those specific cases for us).
 "conf/*" = ["INP001"]
 "scripts/*" = ["INP001"]
-
-[tool.ruff.flake8-bugbear]
-extend-immutable-calls = ["fastapi.Depends", "fastapi.params.Depends"]

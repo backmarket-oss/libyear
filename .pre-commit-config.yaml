@@ -11,12 +11,6 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
 
-  - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: 'v0.10.0.1'
-    hooks:
-      - id: shellcheck
-        args: ['-x']
-
   - repo: local
     hooks:
       - id: python-check-blanket-nosec
@@ -47,14 +41,6 @@ repos:
         language: system
         types: [python]
         require_serial: true
-
-  - repo: local
-    hooks:
-      - id: spectral-lint
-        name: spectral-lint
-        entry: make spectral-lint
-        files: 'docs/openapi/.*\.yaml'
-        language: system
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: 'v0.3.3'
